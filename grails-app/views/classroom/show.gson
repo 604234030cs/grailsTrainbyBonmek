@@ -1,0 +1,7 @@
+import box.Classroom
+
+model {
+	List<Classroom> data
+}
+
+json tmpl.classroom(classroom)

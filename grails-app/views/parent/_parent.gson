@@ -1,0 +1,7 @@
+import box.Parent
+
+model {
+	Parent parent
+}
+
+json g.render(parent)

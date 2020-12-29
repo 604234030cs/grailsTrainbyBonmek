@@ -1,0 +1,5 @@
+import box.Book
+model{
+    List<Book> data
+}
+json tmpl.book(data)

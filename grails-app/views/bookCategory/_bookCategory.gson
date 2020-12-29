@@ -1,0 +1,7 @@
+import box.BookCategory
+
+model {
+	BookCategory bookCategory
+}
+
+json g.render(bookCategory)

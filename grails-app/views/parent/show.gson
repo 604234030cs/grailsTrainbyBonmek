@@ -1,0 +1,7 @@
+import box.Parent
+
+model {
+	List<Parent> data
+}
+
+json tmpl.parent(parent)

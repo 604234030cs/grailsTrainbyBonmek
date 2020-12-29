@@ -1,0 +1,7 @@
+import box.Classroom
+
+model {
+	Classroom classroom
+}
+
+json g.render(classroom)

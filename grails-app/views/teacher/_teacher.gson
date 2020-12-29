@@ -1,0 +1,7 @@
+import box.Teacher
+
+model {
+	Teacher teacher
+}
+
+json g.render(teacher)
