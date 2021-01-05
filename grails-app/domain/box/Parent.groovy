@@ -9,7 +9,7 @@ class Parent {
     String parentPassword
     String parentTitle
     String parentName
-    String parentSname
+    String parentSName
     String parentTel
     String parentAddress
 

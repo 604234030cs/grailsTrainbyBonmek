@@ -59,7 +59,7 @@ class TeacherController {
             
         }
 
-        result.data = teacherList.list(offset: params.offset ?: 0, max: params.max ?: 10)
+        result.data = teacherList.list(offset: params.offset ?: 0, max: params.max ?: 50)
         result.totalCount = teacherList.count()
         result.valid = true
 

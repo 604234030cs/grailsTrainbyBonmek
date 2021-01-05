@@ -135,6 +135,26 @@ class FixtureService {
             teacherTel: '0631231456'
         ]).save()
         
+        def teacher4 = new Teacher([
+            teacherUser: 'teacher3',
+            teacherPassword: 'teacher3',
+            teacherTitle: 'นางสาว',
+            teacherName: 'อัสมา',
+            teacherSname: 'ปังมาก',
+            teacherAddress: 'นราธิวาส',
+            teacherTel: '0631231456'
+        ]).save()
+        
+        def teacher5 = new Teacher([
+            teacherUser: 'teacher3',
+            teacherPassword: 'teacher3',
+            teacherTitle: 'นางสาว',
+            teacherName: 'อัสมา',
+            teacherSname: 'ปังมากมาก',
+            teacherAddress: 'นราธิวาส',
+            teacherTel: '0631231456'
+        ]).save()
+        
         def parent1 = new Parent([
             parentUser: 'parent028',
             parentPassword: 'parent028',

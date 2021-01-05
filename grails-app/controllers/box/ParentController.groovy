@@ -25,6 +25,10 @@ class ParentController {
 
         def parentList = Parent.where{}.build {
 
+            if(filter.id){
+                eq 'id', filter.id
+            }
+
             if(filter.user){
                 eq 'parentUser', filter.user
             }
@@ -138,7 +142,7 @@ class ParentController {
 
 class ParentFilter {
 
-    
+    Long id
     String user
     String password
     String title

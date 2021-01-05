@@ -4,4 +4,16 @@ model {
 	Student student
 }
 
-json g.render(student)
+
+// json g.render(student, [deep:true])  ดึงข้อมูลที่เกี่ยวข้องมาทั้งหมด
+
+ json g.render(student, [excludes:['parent','classroom']]){
+	parent {
+		
+		user student.parent.parentUser
+	};
+	classroom{
+		name student.classroom.className
+	}
+
+}

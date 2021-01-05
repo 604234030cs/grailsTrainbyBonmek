@@ -1,7 +1,7 @@
 import box.Student
 
 model {
-	List<Student> data
+	Student data
 }
 
-json tmpl.student(student)
+json tmpl.student(data)

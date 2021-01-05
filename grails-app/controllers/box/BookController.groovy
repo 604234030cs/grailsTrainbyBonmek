@@ -70,7 +70,7 @@ class BookController {
         result.valid = true
         result.data = book
         
-        render(view: "show", model: [data: result.data])
+        render(template: "${params.__template}"?: "book" , model: [book:book])
     }
 
     def save(Book book){

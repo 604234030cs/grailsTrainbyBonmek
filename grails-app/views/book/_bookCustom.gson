@@ -1,0 +1,7 @@
+import box.Book
+
+model {
+    Book book
+}
+
+json g.render(book, [deep:false])
