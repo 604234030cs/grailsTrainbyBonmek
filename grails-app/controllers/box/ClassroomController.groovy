@@ -26,12 +26,13 @@ class ClassroomController {
 
         def classroomList = Classroom.where{}.build {
 
-            if(filter.classId){
-                eq 'id', filter.classId
+
+            if(filter.classroomId){
+                eq 'id',filter.classroomId
             }
 
             if(filter.className){
-               eq 'className',filter.className
+               ilike 'className', "%${filter.className}%"
             }
         
             //เท่ากับ
@@ -42,18 +43,18 @@ class ClassroomController {
             
         }
 
-        result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 10)
+        result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 100)
         result.totalCount = classroomList.count()
         result.valid = true
 
         render(view: "index", model: [data: result.data])
      }
-     def show(Long id){
+    def show(Long id){
         def result = [valid: false]
-        def classname = Classroom.get(id)
+        def classroom = Classroom.get(id)
 
         result.valid = true
-        result.data = parent
+        result.data = classroom
         
         render(view: "show", model: [data: result.data])
     }
@@ -66,7 +67,7 @@ class ClassroomController {
                 return
             }
             classname.save(failOnError: true)
-            result.data = parent
+            result.data = classroom
             result.valid = true
         }catch(ValidationException error){
             respond classname.errors
@@ -94,7 +95,7 @@ class ClassroomController {
         try {
             def classname = Classroom.get(id)
             if(!classname){
-                throw new Exception("not found parent id: ${id}")
+                throw new Exception("not found classroom id: ${id}")
             }
             classname.delete()
             result.valid = true
@@ -109,7 +110,7 @@ class ClassroomController {
 
 class ClassroomFilter {
 
-    Long classId
+    Long id
     String className
     Long teacherId
 

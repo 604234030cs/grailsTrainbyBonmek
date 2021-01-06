@@ -224,6 +224,21 @@ class FixtureService {
             className: 'ป.3',
             teacher: teacher1
         ]).save()
+        
+        def classroom4 = new Classroom([
+            className: 'ป.4',
+            teacher: teacher1
+        ]).save()
+        
+        def classroom5 = new Classroom([
+            className: 'ป.5',
+            teacher: teacher2
+        ]).save()
+        
+        def classroom6 = new Classroom([
+            className: 'ป.6',
+            teacher: teacher1
+        ]).save()
 
         def student1 = new Student([
             studentTitle: 'เด็กหญิง',
