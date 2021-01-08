@@ -7,6 +7,7 @@ class Classroom {
 
     static belongsTo = [teacher: Teacher]
 
-    static constraints = {
+        static mapping = {
+        id "desc"
     }
 }

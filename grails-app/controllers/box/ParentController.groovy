@@ -28,55 +28,43 @@ class ParentController {
             if(filter.id){
                 eq 'id', filter.id
             }
-
+            //test
             if(filter.user){
-                eq 'parentUser', filter.user
+                ilike 'ParentUser', "%${filter.user}%"
             }
             
             if(filter.password){
-                eq 'parentPassword', filter.password
+                gt 'ParentPassword', filter.password
             }
 
             if(filter.title != null){
-                eq 'parentTitle', filter.title
+                eq 'ParentTitle', filter.title
             }
 
             if(filter.name){
-                gt 'parentName', filter.name
+                gt 'ParentName', filter.name
             }
             if(filter.sname){
-                gt 'parentSname', filter.sname
-            }
-
-            if(filter.tel){
-                gt 'parentTel', filter.tel
+                gt 'ParentSname', filter.sname
             }
 
             if(filter.address){
-                gt 'parentAddress', filter.address
+                gt 'ParentAddress', filter.address
             }
 
-            if(filter.teacherId){
-                eq 'teacher.id', filter.teacherId
+            if(filter.tel){
+                gt 'ParentTel', filter.tel
             }
-            // if(filter.bookCateId){
-            //     eq 'category.id', filter.bookCateId
-            // }
-            // if(filter.teacheruser){
-            //     teacherUser {
-            //         teacher {
-            //             ilike 'teacherUser', "%${filter.teacherid}%"
-            //         }
-            //     }
-            // }
+
             
         }
 
-        result.data = parentList.list(offset: params.offset ?: 0, max: params.max ?: 10)
+        result.data = parentList.list(offset: params.offset ?: 0, max: params.max ?: 2)
         result.totalCount = parentList.count()
+        result.message = "world2"
         result.valid = true
 
-        render(view: "index", model: [data: result.data])
+        render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message])
     }
 
     def show(Long id){
@@ -84,7 +72,7 @@ class ParentController {
         def parent = Parent.get(id)
 
         result.valid = true
-        result.data = parent
+        result.data =parent
         
         render(view: "show", model: [data: result.data])
     }
@@ -125,7 +113,7 @@ class ParentController {
         try {
             def parent = Parent.get(id)
             if(!parent){
-                throw new Exception("not found parent id: ${id}")
+                throw new Exception("not found Parent id: ${id}")
             }
             parent.delete()
             result.valid = true
@@ -142,6 +130,7 @@ class ParentController {
 
 class ParentFilter {
 
+    
     Long id
     String user
     String password
@@ -150,7 +139,13 @@ class ParentFilter {
     String sname
     String tel
     String address
-    Long teacherId
 
- 
+    // String ParenttitleEng__ilike
+    // Double price__gt
+    // Boolean isRead
+    // LocalDate since
+    // LocalDate since1
+    // LocalDate since2
+    // String authorParenttitle
+    // Long bookCateId 
 }

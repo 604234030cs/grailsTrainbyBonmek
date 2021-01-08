@@ -10,8 +10,13 @@ import java.time.LocalDate
 
 class ClassroomController {
 	static responseFormats = ['json', 'xml']
+
 	
     def index() {
+        println(params.offset)
+        println(params.max)
+        println(params.sortOrder)
+        println(params.sortField)
 
         def result = [valid: false]
 
@@ -39,19 +44,51 @@ class ClassroomController {
             if(filter.teacherId){
                 eq 'teacher.id', filter.teacherId
             }
-
+            
             
         }
 
-        result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 100)
-        result.totalCount = classroomList.count()
-        result.valid = true
 
-        render(view: "index", model: [data: result.data])
+
+        if(params.sortOrder == '1'){
+
+        
+            result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort: params.sortField?:'id',order:'asc')
+            result.totalCount = classroomList.count()
+            result.valid = true
+            render(view: "index", model: [data: result.data,totalCount: result.totalCount])
+
+        }else if(params.sortOrder == '-1'){
+             result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort:params.sortField?:'id',order:'desc')
+             result.totalCount = classroomList.count()
+             result.valid = true
+             render(view: "index", model: [data: result.data,totalCount: result.totalCount])
+        }
+
+
+
+
      }
+// ------------------------------------------test--------------------------
+
+
+
+//-------------------------------------------show--------------------------
+
+
+
+
     def show(Long id){
         def result = [valid: false]
         def classroom = Classroom.get(id)
+
+        // def list(Integer max){
+        //     params.max = Math.min(max ?:12)
+        //     if(params.sort ==null){
+        //         params.sort = "published"
+        //     }
+        //     [classroomList:published.list(params),publicationInstanceTotal: Publication.count()]
+        // }
 
         result.valid = true
         result.data = classroom

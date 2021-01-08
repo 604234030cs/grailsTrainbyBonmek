@@ -2,7 +2,12 @@ import box.Classroom
 
 model {
 	List<Classroom> data
+	Long totalCount
 }
 
-json tmpl.classroom(data)
+
+json{
+	data tmpl.classroom(data)
+	dataCount totalCount
+}
 

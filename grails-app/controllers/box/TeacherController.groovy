@@ -63,7 +63,7 @@ class TeacherController {
         result.totalCount = teacherList.count()
         result.valid = true
 
-        render(view: "index", model: [data: result.data])
+        render(view: "index", model: [data: result.data,totalCount: result.totalCount,valid: result.valid])
     }
 
     def show(Long id){

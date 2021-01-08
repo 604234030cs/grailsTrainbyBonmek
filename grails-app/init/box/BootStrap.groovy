@@ -6,7 +6,9 @@ class BootStrap {
     // FixtureService fixtureService
 
     def init = { servletContext ->
-        fixtureService.createTestData()
+
+        
+        // fixtureService.createTestData()
     }
     def destroy = {
     }

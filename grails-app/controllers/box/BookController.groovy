@@ -59,8 +59,8 @@ class BookController {
         result.data = booksCriteria.list(offset: params.offset ?: 0, max: params.max ?: 10)
         result.totalCount = booksCriteria.count()
         result.valid = true
-
-        render(view: "index", model: [data: result.data])
+        render(template: "${params.__template}"?: "book" , model: [book:book])
+        // render(view: "index", model: [data: result.data])
     }
 
     def show(Long id){
@@ -69,7 +69,7 @@ class BookController {
 
         result.valid = true
         result.data = book
-        
+        render(view: "show", model: [data: result.data])
         // render(template: "${params.__template}"?: "book" , model: [book:book])
     }
 
