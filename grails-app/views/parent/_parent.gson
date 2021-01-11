@@ -1,10 +1,11 @@
 import box.Parent
 
 model {
-	Parent parent
+	List<Parent> data
 }
 
 // json g.render(parent)
+
 json {
-	parent g.render(parent)
+	parent g.render(data, [deep:false])
 }

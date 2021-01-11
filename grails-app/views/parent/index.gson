@@ -4,19 +4,27 @@ import box.Parent
 model {
     List<Parent> data
     String message
-    Iterable objectList //TODO naming here?
+    //Iterable sort //TODO naming here?
     Long dataCount
     Integer max
     Integer offset
     String sort
     String order
+    Long template
+    Boolean valid
+    String dataresource
+    
 
 
 }
-response.contentType "application/hal+json"
+// response.contentType "application/hal+json"
 
+def template = dataresource?"${dataresource}": "parent"
+println template
 json {
-    data tmpl.parent(data)
+    data g.render(template: template , model: [data:data])
+    // data tmpl.parent(data)
+   // data tmpl.parent(data)
     message {
         greet message
         greet2 message
@@ -29,7 +37,9 @@ json {
     dataCount {
         totalNumberInController dataCount
     }
-    template {}
+    tmpl {
+        data dataresource
+    }
 
 
 }

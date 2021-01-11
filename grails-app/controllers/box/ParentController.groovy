@@ -70,7 +70,7 @@ class ParentController {
         result.tmpl = params.__template
         println("datatmpl->"+result.tmpl)
         // render(template: "${params.__template}"?: "parent" , model: [parent:parent])
-        render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message])
+        render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message,dataresource:result.tmpl])
     }
 
     def show(Long id){
