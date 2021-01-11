@@ -10,6 +10,9 @@ class BookController {
 	static responseFormats = ['json']
 	
     def index() { 
+        println("index()")
+        println(params.__template)
+
         def result = [valid: false]
 
         // def qp = params
@@ -64,13 +67,15 @@ class BookController {
     }
 
     def show(Long id){
+        println("show()")
+        println(params.__template)
         def result = [valid: false]
         def book = Book.get(id)
 
         result.valid = true
         result.data = book
-        render(view: "show", model: [data: result.data])
-        // render(template: "${params.__template}"?: "book" , model: [book:book])
+        // render(view: "show", model: [data: result.data])
+        render(template: "${params.__template}"?: "book" , model: [book:book])
     }
 
     def save(Book book){

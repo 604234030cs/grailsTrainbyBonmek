@@ -6,4 +6,4 @@ model {
 
 //json g.render(book)
 
-json g.render(book, [deep:true])
+json g.render(book, [deep:false])

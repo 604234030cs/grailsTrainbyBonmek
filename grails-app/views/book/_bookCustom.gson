@@ -4,4 +4,4 @@ model {
     Book book
 }
 
-json g.render(book, [deep:false])
+json g.render(book, [deep:true])

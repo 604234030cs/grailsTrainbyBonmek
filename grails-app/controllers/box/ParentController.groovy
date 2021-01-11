@@ -10,8 +10,11 @@ import java.time.LocalDate
 class ParentController {
 
 	static responseFormats = ['json']
+
 	
     def index() { 
+        println("index()")
+        println(params.__template)
         def result = [valid: false]
 
         // def qp = params
@@ -58,23 +61,28 @@ class ParentController {
 
             
         }
+        
 
         result.data = parentList.list(offset: params.offset ?: 0, max: params.max ?: 2)
         result.totalCount = parentList.count()
         result.message = "world2"
         result.valid = true
-
+        result.tmpl = params.__template
+        println("datatmpl->"+result.tmpl)
+        // render(template: "${params.__template}"?: "parent" , model: [parent:parent])
         render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message])
     }
 
     def show(Long id){
+        println("show()")
         def result = [valid: false]
         def parent = Parent.get(id)
 
         result.valid = true
         result.data =parent
         
-        render(view: "show", model: [data: result.data])
+        // render(view: "show", model: [data: result.data])
+        render(template: "${params.__template}"?: "parent" , model: [parent:parent])
     }
 
     def save(Parent parent){

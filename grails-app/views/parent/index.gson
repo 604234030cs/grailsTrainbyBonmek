@@ -11,24 +11,26 @@ model {
     String sort
     String order
 
+
 }
 response.contentType "application/hal+json"
 
-json tmpl.parent(data)
-json.message {
-    hello message
-
-    
-}
 json {
+    data tmpl.parent(data)
+    message {
+        greet message
+        greet2 message
+    }
+    abountUser {
     name data.parentName
-    dataCount dataCount
+    sname data.parentSName 
+    tel data.parentTel 
+    }
+    dataCount {
+        totalNumberInController dataCount
+    }
+    template {}
+
+
 }
-
-
-
-
-json(1,2,3,4) == "[1,2,3]"
-json { name "Bobbb" } == '{"name":"Bob"}'
-json([1,2,3]) { n it } == '[{"n":1},{"n":2},{"n":3}]'
 

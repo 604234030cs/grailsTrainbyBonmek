@@ -5,6 +5,7 @@ model {
 }
 
 // json g.render(parent)
+
 json {
-	parent g.render(parent)
+	parent g.render(parent, [deep:true])
 }

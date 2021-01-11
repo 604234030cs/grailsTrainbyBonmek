@@ -4,4 +4,4 @@ model {
     Book data
 }
 
-json tmpl.book(data)
+json tmpl.bookCustom(data)
