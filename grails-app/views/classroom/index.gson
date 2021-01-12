@@ -3,11 +3,14 @@ import box.Classroom
 model {
 	List<Classroom> data
 	Long totalCount
+	String dataresource
 }
 
-
+def template = dataresource?"$dataresource": "classroom"
 json{
-	data tmpl.classroom(data)
+	data g.render(template:template,model:[data:data])
+	//data tmpl.classroom(data)
 	dataCount totalCount
+
 }
 

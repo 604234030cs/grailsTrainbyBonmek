@@ -17,6 +17,7 @@ class ClassroomController {
         println(params.max)
         println(params.sortOrder)
         println(params.sortField)
+        println(params.__template)
 
         def result = [valid: false]
 
@@ -32,8 +33,8 @@ class ClassroomController {
         def classroomList = Classroom.where{}.build {
 
 
-            if(filter.classroomId){
-                eq 'id',filter.classroomId
+            if(filter.classId){
+                eq 'id',filter.classId
             }
 
             if(filter.className){
@@ -48,42 +49,67 @@ class ClassroomController {
             
         }
 
+            result.totalCount = classroomList.count()
+            result.valid = true
+            result.tmpl = params.__template
+            result.sortOrder = (params.sortOrder == '1')? "acs":"desc";
+            result.data = classroomList.list(offset: params.offset?:0,max: params.max ?: 12,sort: result.sortField?:'id',order:result.sortOrder)
+            render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message,dataresource:result.tmpl,totalCount:result.totalCount])
 
 
-        if(params.sortOrder == '1'){
+        // if(params.sortOrder == '1'){
 
-            if(params.sortField == 'undefined'){
-                println('sortField undifined')
-                result.sortField = 'id' 
-                result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort: result.sortField?:'id',order:'asc')
-                result.totalCount = classroomList.count()
-                result.valid = true
-                render(view: "index", model: [data: result.data,totalCount: result.totalCount])
-            }else{
-                result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort:params.sortField?:'id',order:'asc')
-                result.totalCount = classroomList.count()
-                result.valid = true
-                render(view: "index", model: [data: result.data,totalCount: result.totalCount])
-            }
+        //     if(params.sortField == 'undefined'){
+        //         println('sortField undifined')
+        //         result.sortField = 'id' 
+        //         result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort: result.sortField?:'id',order:'asc')
+        //         result.totalCount = classroomList.count()
+        //         result.valid = true
+        //         result.tmpl = params.__template
+        //         render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message,dataresource:result.tmpl,totalCount:result.totalCount])
+        //     }else{
+        //         result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort:params.sortField?:'id',order:'asc')
+        //         result.totalCount = classroomList.count()
+        //         result.valid = true
+        //         result.tmpl = params.__template
+        //         render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message,dataresource:result.tmpl,totalCount:result.totalCount])
+        //     }
 
 
 
-        }else if(params.sortOrder == '-1'){
+        // }else if(params.sortOrder == '-1'){
 
          
-            if(params.sortField == 'undefined'){
-                result.sortField = 'id' 
-                result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort: result.sortField?:'id',order:'desc')
-                result.totalCount = classroomList.count()
-                result.valid = true
-                render(view: "index", model: [data: result.data,totalCount: result.totalCount])
-            }else{
-                result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort:params.sortField?:'id',order:'desc')
-                result.totalCount = classroomList.count()
-                result.valid = true
-                render(view: "index", model: [data: result.data,totalCount: result.totalCount])
-            }
-        }
+        //     if(params.sortField == 'undefined'){
+        //         result.sortField = 'id' 
+        //         result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort: result.sortField?:'id',order:'desc')
+        //         result.totalCount = classroomList.count()
+        //         result.valid = true
+        //         result.tmpl = params.__template
+        //         render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message,dataresource:result.tmpl,totalCount:result.totalCount])
+        //     }else{
+        //         result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort:params.sortField?:'id',order:'desc')
+        //         result.totalCount = classroomList.count()
+        //         result.valid = true
+        //         result.tmpl = params.__template
+        //         render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message,dataresource:result.tmpl,totalCount:result.totalCount])
+        //     }
+        // }else{
+        //     if(params.sortField == 'undefined'){
+        //         result.sortField = 'id' 
+        //         result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort: result.sortField?:'id',order:'desc')
+        //         result.totalCount = classroomList.count()
+        //         result.valid = true
+        //         result.tmpl = params.__template
+        //         render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message,dataresource:result.tmpl,totalCount:result.totalCount])
+        //     }else{
+        //         result.data = classroomList.list(offset: params.offset ?: 0, max: params.max ?: 12,sort:params.sortField?:'id',order:'desc')
+        //         result.totalCount = classroomList.count()
+        //         result.valid = true
+        //         result.tmpl = params.__template
+        //         render(view: "index", model: [data: result.data,dataCount: result.totalCount,valid: result.valid,message: result.message,dataresource:result.tmpl,totalCount:result.totalCount])
+        //     }
+        // }
 
 
      }
@@ -97,6 +123,7 @@ class ClassroomController {
 
 
     def show(Long id){
+        println("show()")
         def result = [valid: false]
         def classroom = Classroom.get(id)
 
@@ -157,7 +184,7 @@ class ClassroomController {
 
 class ClassroomFilter {
 
-    Long id
+    Long classId
     String className
     Long teacherId
 

@@ -4,5 +4,5 @@ model {
 	List<Classroom> data
 }
 
-json g.render(data,[deep:false])
+json g.render(data,[deep:true])
 
